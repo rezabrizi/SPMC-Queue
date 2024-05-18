@@ -1,5 +1,7 @@
+
 #pragma once
-#include <stdint.h>
+
+#include <cstdint>
 #include <functional>
 #include <atomic>
 
@@ -9,61 +11,79 @@ using WriteCallback = std::function<void(uint8_t* data)>;
 
 struct Block
 {
+    // Local block versions reduce contention for the queue
     std::atomic<BlockVersion> mVersion;
+    // Size of the data
     std::atomic<MessageSize> mSize;
+    // 64 byte buffer
     alignas(64) uint8_t mData[64];
 };
 
 struct Header
 {
+    // Block count
     alignas(64) std::atomic<uint64_t> mBlockCounter {0};
-    alignas(64) Block mBlocks[0];
 };
 
-constexpr size_t NUM_BLOCKS = 1024;
 
 struct Q {
     Header mHeader;
-    Block mBlocks[NUM_BLOCKS];
+    Block* mBlocks;
+    size_t mSz;
 
-    Q()
+    Q(size_t sz): mSz(sz)
     {
-        for (size_t i = 0; i < NUM_BLOCKS; i++)
+        mBlocks = new Block[mSz];
+        for (size_t i = 0; i < mSz; i++)
         {
             mBlocks[i].mVersion.store(0, std::memory_order_relaxed);
             mBlocks[i].mSize.store(0, std::memory_order_relaxed);
         }
     }
-
-    void Write(MessageSize size, WriteCallback writeCallback){
-        uint64_t blockIndex = mHeader.mBlockCounter.fetch_add(1, std::memory_order_relaxed) % NUM_BLOCKS;
-        Block &block = mBlocks[blockIndex];
-
-        BlockVersion newVersion = block.mVersion.load(std::memory_order_acquire) + 1;
-        block.mSize.store(size, std::memory_order_release);
-
-        writeCallback(block.mData);
-
-        block.mVersion.store(newVersion, std::memory_order_release);
-
+    ~Q()
+    {
+        delete[] mBlocks;
     }
 
-    bool Read (uint64_t blockIndex, uint8_t* data, MessageSize& size){
+    void Write(MessageSize size, WriteCallback c){
+        // the next block index to write to
+        uint64_t blockIndex = mHeader.mBlockCounter.fetch_add(1, std::memory_order_relaxed) % mSz;
         Block &block = mBlocks[blockIndex];
 
+        BlockVersion currentVersion = block.mVersion.load(std::memory_order_acquire) + 1;
+
+        // the block has been written to before so it has an odd version
+        // we need to make its version even before writing begins to indicate that writing is in progress
+        if (block.mVersion % 2 == 1){
+            // make the version even
+            block.mVersion.store(currentVersion, std::memory_order_release);
+            // store the newVersion used for after the writing is done
+            currentVersion++;
+        }
+        // store the size
+        block.mSize.store(size, std::memory_order_release);
+        // perform write using the callback function
+        c(block.mData);
+        // store the new odd version
+        block.mVersion.store(currentVersion, std::memory_order_release);
+    }
+
+    bool Read (uint64_t blockIndex, uint8_t* data, MessageSize& size) const {
+        // Block
+        Block &block = mBlocks[blockIndex];
+        // Block version
         BlockVersion version = block.mVersion.load(std::memory_order_acquire);
-
+        // Read when version is odd
         if(version % 2 == 1){
-
+            // Size of the data
             size = block.mSize.load(std::memory_order_acquire);
-
+            // Perform the read
             std::memcpy(data, block.mData, size);
-
-            block.mVersion.store(version + 1, std::memory_order_release);
-
+            // Indicate that a read has occurred by adding a 2 to the version
+            // However do not block subsequent reads
+            block.mVersion.store(version + 2, std::memory_order_release);
             return true;
         }
-
         return false;
     }
 };
