@@ -38,9 +38,9 @@
 			[
 				{
 					"directoryIndex" : 0,
-					"id" : "SMPC_Queue::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-SMPC_Queue-Debug-7329e0633684cd012593.json",
-					"name" : "SMPC_Queue",
+					"id" : "benchmark::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-benchmark-Debug-d2cf2050e4133eab3977.json",
+					"name" : "benchmark",
 					"projectIndex" : 0
 				}
 			]

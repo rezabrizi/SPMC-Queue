@@ -2,6 +2,34 @@
 	"entries" : 
 	[
 		{
+			"name" : "Boost_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "The directory containing a CMake configuration file for Boost."
+				}
+			],
+			"type" : "PATH",
+			"value" : "/opt/homebrew/opt/boost/lib/cmake/Boost-1.85.0"
+		},
+		{
+			"name" : "Boost_INCLUDE_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Path to a file."
+				}
+			],
+			"type" : "PATH",
+			"value" : "/opt/homebrew/Cellar/boost/1.85.0/include"
+		},
+		{
 			"name" : "CMAKE_ADDR2LINE",
 			"properties" : 
 			[
@@ -1118,6 +1146,18 @@
 			"value" : "FALSE"
 		},
 		{
+			"name" : "FIND_PACKAGE_MESSAGE_DETAILS_Boost",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Details about finding Boost"
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "[/opt/homebrew/opt/boost/lib/cmake/Boost-1.85.0/BoostConfig.cmake][c ][v1.85.0()]"
+		},
+		{
 			"name" : "SMPC_Queue_BINARY_DIR",
 			"properties" : 
 			[
@@ -1152,6 +1192,34 @@
 			],
 			"type" : "STATIC",
 			"value" : "/Users/rezatabrizi/dev/CLionProjects/SPMC_Queue"
+		},
+		{
+			"name" : "boost_headers_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "The directory containing a CMake configuration file for boost_headers."
+				}
+			],
+			"type" : "PATH",
+			"value" : "/opt/homebrew/opt/boost/lib/cmake/boost_headers-1.85.0"
+		},
+		{
+			"name" : "boost_lockfree_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "The directory containing a CMake configuration file for boost_lockfree."
+				}
+			],
+			"type" : "PATH",
+			"value" : "boost_lockfree_DIR-NOTFOUND"
 		}
 	],
 	"kind" : "cache",

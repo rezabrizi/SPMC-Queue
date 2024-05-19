@@ -1,3 +1,8 @@
+/**
+ * Author: Reza A Tabrizi
+ * Email: Rtabrizi03@gmail.com
+ */
+
 
 #pragma once
 
@@ -26,13 +31,11 @@ struct Header
 };
 
 
-struct Q {
-    Header mHeader;
-    Block* mBlocks;
-    size_t mSz;
-
+class Q {
+public:
     Q(size_t sz): mSz(sz)
     {
+        // initialize the ring buffer
         mBlocks = new Block[mSz];
         for (size_t i = 0; i < mSz; i++)
         {
@@ -51,8 +54,7 @@ struct Q {
         Block &block = mBlocks[blockIndex];
 
         BlockVersion currentVersion = block.mVersion.load(std::memory_order_acquire) + 1;
-
-        // the block has been written to before so it has an odd version
+        // If the block has been written to before, it has an odd version
         // we need to make its version even before writing begins to indicate that writing is in progress
         if (block.mVersion % 2 == 1){
             // make the version even
@@ -86,4 +88,13 @@ struct Q {
         }
         return false;
     }
+
+    size_t size () const {
+        return mSz;
+    }
+
+private:
+    Header mHeader;
+    Block* mBlocks;
+    size_t mSz;
 };
