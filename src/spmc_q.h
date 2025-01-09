@@ -50,13 +50,13 @@ public:
 
     void Write(MessageSize size, WriteCallback c){
         // the next block index to write to
-        uint64_t blockIndex = mHeader.mBlockCounter.fetch_add(1, std::memory_order_relaxed) % mSz;
+        uint64_t blockIndex = mHeader.mBlockCounter.fetch_add(1, std::memory_order_acquire) % mSz;
         Block &block = mBlocks[blockIndex];
 
         BlockVersion currentVersion = block.mVersion.load(std::memory_order_acquire) + 1;
         // If the block has been written to before, it has an odd version
         // we need to make its version even before writing begins to indicate that writing is in progress
-        if (block.mVersion % 2 == 1){
+        if (block.mVersion.load(std::memory_order_acquire) % 2 == 1){
             // make the version even
             block.mVersion.store(currentVersion, std::memory_order_release);
             // store the newVersion used for after the writing is done

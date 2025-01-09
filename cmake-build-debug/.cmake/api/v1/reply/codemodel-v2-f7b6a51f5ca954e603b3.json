@@ -39,7 +39,7 @@
 				{
 					"directoryIndex" : 0,
 					"id" : "benchmark::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-benchmark-Debug-d2cf2050e4133eab3977.json",
+					"jsonFile" : "target-benchmark-Debug-b6d4de3a70a36a50dc1b.json",
 					"name" : "benchmark",
 					"projectIndex" : 0
 				}
@@ -49,8 +49,8 @@
 	"kind" : "codemodel",
 	"paths" : 
 	{
-		"build" : "/Users/rezatabrizi/dev/CLionProjects/SPMC_Queue/cmake-build-debug",
-		"source" : "/Users/rezatabrizi/dev/CLionProjects/SPMC_Queue"
+		"build" : "/Users/rezatabrizi/dev/CLionProjects/SPMC-Queue/cmake-build-debug",
+		"source" : "/Users/rezatabrizi/dev/CLionProjects/SPMC-Queue"
 	},
 	"version" : 
 	{
