@@ -1,25 +1,71 @@
-# ⚡️ Single Producer, Multiple Consumer Queue (Ring Buffer)
+# ⚡️ Lock-Free Queues (SPSC & SPMC)
 
-Inspired by a talk at CPPCon 2022: [Trading at Light Speed](https://youtu.be/8uAW5FQtcvE), I wanted to create my own version of a single producer, multiple consumer ring buffer (SPMC queue). This type of queue allows for multicast message fanning.
+Inspired by a talk at CPPCon 2022: [Trading at Light Speed](https://youtu.be/8uAW5FQtcvE), I wanted to explore lock-free queue designs that avoid the overhead of mutexes while maintaining high performance and concurrency.
 
-In this case, multicast message fanning refers to multiple threads accessing the same messages produced by a single producer. Obviously, concurrency management and synchronization are the design factors of such a queue.
+A **lock-free queue** eliminates costly locks and context switches by relying on **atomic operations**. These queues enable **fast message passing** between threads with minimal contention.
 
-One way to approach the problem is to simply use locks and mutexes, but the overhead is too high. The latency when using locks is not good. I am not an expert on locks, but I will state a few reasons why locks and mutexes are slow:
-1. Context switching is costly when acquiring a lock.
-2. Waiting to acquire a lock increases contention and decreases performance.
-3. Locks are not cache friendly at all because one thread might invalidate the cache line of another lock.
+## 🚀 Why Lock-Free?
+Using locks and mutexes introduces significant performance issues:
+1. **Context switching overhead** when threads wait for locks.
+2. **Increased contention** when multiple threads compete for the same resource.
+3. **Poor cache efficiency**, as one thread might invalidate another's cache line.
 
-## 1️⃣ SPMC Version 1
-As David Gross explains in the talk *Trading at Light Speed*, atomic operations are the way to go for a lock-free design. In version 1 of the lock-free queue, David Gross proposes having 2 atomic indices that are globally shared within the queue structure to synchronize reading and writing.
+Instead of locks, **atomic operations** and **versioning techniques** allow for efficient synchronization while ensuring correctness.
+
+---
+
+## 1️⃣ Single Producer Multiple Consumer (SPMC)
+A **Single Producer Multiple Consumer (SPMC) queue** allows **one writer** to produce messages and **multiple consumers** to read them.
+
+### 🔹 SPMC Version 1: Global Indices
+As David Gross explains in *Trading at Light Speed*, the first version of an SPMC queue uses **two global atomic indices** to synchronize reads and writes.
+
 ![SPMC V1](assets/spmc_q_v1.png)
 
-However, there is still a way to create a much faster version of this lock-free queue. In version 1, when the synchronization indices are in a global scope, all threads update the same global variables. This leads to high contention and bottlenecks as threads compete to update the same shared resource.
+While effective, this approach has **high contention** because all consumers and the producer update the same **global** indices.
 
-## 2️⃣ SPMC Version 2 ✅
-How about having each element of a queue have its own version number? Well, as shown in the implementation in this code, doing this change brings a NICE performance boost.
-Why?
-1. Reduced Contention: If the atomic synchronization indices are in the local scope of each queue's element, the competition between different threads is reduced. Different threads can work on different blocks concurrently!
-2. Better Cache Utilization: Each thread updates a version number that is close to the data it is working on, so there are fewer cache misses and better cache locality. Each block's (queue element) metadata and data are likely to be cached together.
+### 🔹 SPMC Version 2: Localized Versioning ✅
+A better approach is to **assign each queue element its own version number**. This reduces contention because:
+1. **Consumers operate on separate elements**, reducing atomic operations on shared variables.
+2. **Better cache locality**, since each consumer updates metadata close to the data it reads.
+
+### 📌 How Synchronization Works in SPMC
+1. **Writer increments the version before writing** to prevent consumers from accessing stale data.
+2. **Consumers check the version**:
+   - **Odd version** → Ready to read.
+   - **Even version** → Being written or already read.
+3. **After reading, the consumer increments the version** to allow others to read.
+
+This technique **minimizes atomic contention**, making it significantly faster than global indices.
+
+---
+
+## 2️⃣ Single Producer Single Consumer (SPSC) ✅
+A **Single Producer Single Consumer (SPSC) queue** ensures that each data block is read **exactly once** before being overwritten.
+
+- Each block has an atomic flag `std::atomic<bool> unread` to track whether the data has been read.
+- A writer must **ensure it does not overwrite unread data**.
+- A reader consumes the data **exactly once**, then marks it as read.
+
+### 🔹 Handling Race Conditions
+A potential issue arises if a **writer starts overwriting** a block **before the reader has finished reading**. The solution:
+1. **Writers set `unread` to false before writing** to prevent concurrent reads.
+2. **Using `compare_exchange_strong`** ensures only one reader can consume the block.
+3. **Checking `mVersion`**:
+   - If `mVersion` is **odd**, a reader is reading → **do not overwrite**.
+   - If `mVersion` is **even**, it's safe to write.
+
+### 📌 Why This Works
+- Prevents **data corruption** by ensuring readers do not access partially written blocks.
+- Writers do not overwrite data that has **not been read yet**.
+- Readers can safely consume each block **only once**.
+
+This technique ensures **safe, efficient, and low-latency communication** between a producer and a single consumer.
+
+---
+
+## ⚙️ Queue Implementation
+Each element in the queue maintains **its own version number**, reducing contention and improving cache locality.
 
 ```cpp
 struct Block
@@ -28,19 +74,29 @@ struct Block
     std::atomic<BlockVersion> mVersion;
     // Size of the data
     std::atomic<MessageSize> mSize;
-    // 64 byte buffer
+    // 64-byte buffer
     alignas(64) uint8_t mData[64];
 };
 ```
+## 🔄 Synchronization Overview
 
-###  How does synchronization work?
-1. Initially, all the block's versions are set to 0: no reads allowed.
-2. When writing:
-   1. If it is the first write, just write the data, and after the write is complete, increment the version to 1. The odd version means a read is allowed.
-   2. If it is a rewrite, then the version is already odd, so before writing, increment the version so it is even (no reads allowed). Perform the write. Once writing is done, increment the version again to make it odd (reading is allowed).
-3. When reading:
-   1. Check the version, and if it is odd, perform the read.
-   2. Increment the version by 2 (read by other threads allowed for the same block).
+- **All block versions start at `0`** (no reads allowed).
+
+### ✍️ Writing:
+1. **First write**:
+   - Write the data.
+   - Increment the version to `1` (**odd → read allowed**).
+
+2. **Rewriting**:
+   - Increment the version (**even → no read allowed**).
+   - Perform the write.
+   - Increment the version again (**odd → read allowed**).
+
+### 📖 Reading:
+1. If the version is **odd**, read the data.
+2. Increment the version by `2` (**ready for reuse**).
+
+This method ensures **safe message passing** and **minimizes unnecessary atomic updates**.
 
 **Note:** This design can be slightly modified to make the queue load balance messages instead of multicasting.
 

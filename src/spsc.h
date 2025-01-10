@@ -25,7 +25,7 @@ struct Block{
 };
 
 struct Header{
-    alignas(64) std::atomic<uint64_t> mBlockCounter {0};
+    alignas(std::hardware_destructive_interference_size) std::atomic<uint64_t> mBlockCounter {0};
 };
 
 class SPSC_Q {

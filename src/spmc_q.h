@@ -23,13 +23,13 @@ struct Block
     // Size of the data
     std::atomic<MessageSize> mSize;
     // 64 byte buffer
-    alignas(64) uint8_t mData[64];
+    alignas(std::hardware_constructive_interference_size) uint8_t mData[64];
 };
 
 struct Header
 {
     // Block count
-    alignas(64) std::atomic<uint64_t> mBlockCounter {0};
+    alignas(std::hardware_destructive_interference_size) std::atomic<uint64_t> mBlockCounter {0};
 };
 
 
