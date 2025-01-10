@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="SMPC_Queue"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;CMake Files\..\;CMake Files\..\..\;CMake Files\..\..\..\;CMake Files\..\..\..\..\;CMake Files\..\..\..\..\..\;CMake Files\..\..\..\..\..\opt\;CMake Files\..\..\..\..\..\opt\homebrew\;CMake Files\..\..\..\..\..\opt\homebrew\opt\;CMake Files\..\..\..\..\..\opt\homebrew\opt\boost\;CMake Files\..\..\..\..\..\opt\homebrew\opt\boost\lib\;CMake Files\..\..\..\..\..\opt\homebrew\opt\boost\lib\cmake\;CMake Files\..\..\..\..\..\opt\homebrew\opt\boost\lib\cmake\Boost-1.86.0\;CMake Files\..\..\..\..\..\opt\homebrew\opt\boost\lib\cmake\boost_headers-1.86.0\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="/Users/rezatabrizi/dev/CLionProjects/SPMC-Queue/cmake-build-debug-system"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j11 -f &quot;/Users/rezatabrizi/dev/CLionProjects/SPMC-Queue/cmake-build-debug-system/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -j11 -f &quot;/Users/rezatabrizi/dev/CLionProjects/SPMC-Queue/cmake-build-debug-system/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j11 -f &quot;/Users/rezatabrizi/dev/CLionProjects/SPMC-Queue/cmake-build-debug-system/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j11 -f &quot;/Users/rezatabrizi/dev/CLionProjects/SPMC-Queue/cmake-build-debug-system/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="benchmark">
+				<Option output="/Users/rezatabrizi/dev/CLionProjects/SPMC-Queue/cmake-build-debug-system/benchmark" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/rezatabrizi/dev/CLionProjects/SPMC-Queue/cmake-build-debug-system"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/opt/homebrew/Cellar/boost/1.86.0_1/include"/>
+					<Add directory="/opt/homebrew/Cellar/gcc/14.2.0_1/bin/../lib/gcc/current/gcc/aarch64-apple-darwin24/14/../../../../../../include/c++/14"/>
+					<Add directory="/opt/homebrew/Cellar/gcc/14.2.0_1/bin/../lib/gcc/current/gcc/aarch64-apple-darwin24/14/../../../../../../include/c++/14/aarch64-apple-darwin24"/>
+					<Add directory="/opt/homebrew/Cellar/gcc/14.2.0_1/bin/../lib/gcc/current/gcc/aarch64-apple-darwin24/14/../../../../../../include/c++/14/backward"/>
+					<Add directory="/opt/homebrew/Cellar/gcc/14.2.0_1/bin/../lib/gcc/current/gcc/aarch64-apple-darwin24/14/include"/>
+					<Add directory="/opt/homebrew/Cellar/gcc/14.2.0_1/bin/../lib/gcc/current/gcc/aarch64-apple-darwin24/14/include-fixed"/>
+					<Add directory="/Library/Developer/CommandLineTools/SDKs/MacOSX15.sdk/usr/include"/>
+					<Add directory="/Library/Developer/CommandLineTools/SDKs/MacOSX15.sdk/System/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j11 -f &quot;/Users/rezatabrizi/dev/CLionProjects/SPMC-Queue/cmake-build-debug-system/Makefile&quot;  VERBOSE=1 benchmark"/>
+					<CompileFile command="/usr/bin/make -j11 -f &quot;/Users/rezatabrizi/dev/CLionProjects/SPMC-Queue/cmake-build-debug-system/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j11 -f &quot;/Users/rezatabrizi/dev/CLionProjects/SPMC-Queue/cmake-build-debug-system/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j11 -f &quot;/Users/rezatabrizi/dev/CLionProjects/SPMC-Queue/cmake-build-debug-system/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="benchmark/fast">
+				<Option output="/Users/rezatabrizi/dev/CLionProjects/SPMC-Queue/cmake-build-debug-system/benchmark" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/rezatabrizi/dev/CLionProjects/SPMC-Queue/cmake-build-debug-system"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/opt/homebrew/Cellar/boost/1.86.0_1/include"/>
+					<Add directory="/opt/homebrew/Cellar/gcc/14.2.0_1/bin/../lib/gcc/current/gcc/aarch64-apple-darwin24/14/../../../../../../include/c++/14"/>
+					<Add directory="/opt/homebrew/Cellar/gcc/14.2.0_1/bin/../lib/gcc/current/gcc/aarch64-apple-darwin24/14/../../../../../../include/c++/14/aarch64-apple-darwin24"/>
+					<Add directory="/opt/homebrew/Cellar/gcc/14.2.0_1/bin/../lib/gcc/current/gcc/aarch64-apple-darwin24/14/../../../../../../include/c++/14/backward"/>
+					<Add directory="/opt/homebrew/Cellar/gcc/14.2.0_1/bin/../lib/gcc/current/gcc/aarch64-apple-darwin24/14/include"/>
+					<Add directory="/opt/homebrew/Cellar/gcc/14.2.0_1/bin/../lib/gcc/current/gcc/aarch64-apple-darwin24/14/include-fixed"/>
+					<Add directory="/Library/Developer/CommandLineTools/SDKs/MacOSX15.sdk/usr/include"/>
+					<Add directory="/Library/Developer/CommandLineTools/SDKs/MacOSX15.sdk/System/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j11 -f &quot;/Users/rezatabrizi/dev/CLionProjects/SPMC-Queue/cmake-build-debug-system/Makefile&quot;  VERBOSE=1 benchmark/fast"/>
+					<CompileFile command="/usr/bin/make -j11 -f &quot;/Users/rezatabrizi/dev/CLionProjects/SPMC-Queue/cmake-build-debug-system/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j11 -f &quot;/Users/rezatabrizi/dev/CLionProjects/SPMC-Queue/cmake-build-debug-system/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j11 -f &quot;/Users/rezatabrizi/dev/CLionProjects/SPMC-Queue/cmake-build-debug-system/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="/Users/rezatabrizi/dev/CLionProjects/SPMC-Queue/cmake-build-debug-system"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j11 -f &quot;/Users/rezatabrizi/dev/CLionProjects/SPMC-Queue/cmake-build-debug-system/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -j11 -f &quot;/Users/rezatabrizi/dev/CLionProjects/SPMC-Queue/cmake-build-debug-system/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j11 -f &quot;/Users/rezatabrizi/dev/CLionProjects/SPMC-Queue/cmake-build-debug-system/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j11 -f &quot;/Users/rezatabrizi/dev/CLionProjects/SPMC-Queue/cmake-build-debug-system/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="/Users/rezatabrizi/dev/CLionProjects/SPMC-Queue/cmake-build-debug-system"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j11 -f &quot;/Users/rezatabrizi/dev/CLionProjects/SPMC-Queue/cmake-build-debug-system/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -j11 -f &quot;/Users/rezatabrizi/dev/CLionProjects/SPMC-Queue/cmake-build-debug-system/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j11 -f &quot;/Users/rezatabrizi/dev/CLionProjects/SPMC-Queue/cmake-build-debug-system/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j11 -f &quot;/Users/rezatabrizi/dev/CLionProjects/SPMC-Queue/cmake-build-debug-system/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="/Users/rezatabrizi/dev/CLionProjects/SPMC-Queue/src/benchmark.cpp">
+			<Option target="benchmark"/>
+		</Unit>
+		<Unit filename="/Users/rezatabrizi/dev/CLionProjects/SPMC-Queue/src/benchmark.h">
+			<Option target="benchmark"/>
+		</Unit>
+		<Unit filename="/Users/rezatabrizi/dev/CLionProjects/SPMC-Queue/src/main.cpp">
+			<Option target="benchmark"/>
+		</Unit>
+		<Unit filename="/Users/rezatabrizi/dev/CLionProjects/SPMC-Queue/src/spmc_q.h">
+			<Option target="benchmark"/>
+		</Unit>
+		<Unit filename="/Users/rezatabrizi/dev/CLionProjects/SPMC-Queue/src/spsc.h">
+			<Option target="benchmark"/>
+		</Unit>
+		<Unit filename="/Users/rezatabrizi/dev/CLionProjects/SPMC-Queue/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+		<Unit filename="/Users/rezatabrizi/dev/CLionProjects/SPMC-Queue/../../../../../opt/homebrew/opt/boost/lib/cmake/Boost-1.86.0/BoostConfig.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\opt\homebrew\opt\boost\lib\cmake\Boost-1.86.0\"/>
+		</Unit>
+		<Unit filename="/Users/rezatabrizi/dev/CLionProjects/SPMC-Queue/../../../../../opt/homebrew/opt/boost/lib/cmake/Boost-1.86.0/BoostConfigVersion.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\opt\homebrew\opt\boost\lib\cmake\Boost-1.86.0\"/>
+		</Unit>
+		<Unit filename="/Users/rezatabrizi/dev/CLionProjects/SPMC-Queue/../../../../../opt/homebrew/opt/boost/lib/cmake/boost_headers-1.86.0/boost_headers-config-version.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\opt\homebrew\opt\boost\lib\cmake\boost_headers-1.86.0\"/>
+		</Unit>
+		<Unit filename="/Users/rezatabrizi/dev/CLionProjects/SPMC-Queue/../../../../../opt/homebrew/opt/boost/lib/cmake/boost_headers-1.86.0/boost_headers-config.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\opt\homebrew\opt\boost\lib\cmake\boost_headers-1.86.0\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>

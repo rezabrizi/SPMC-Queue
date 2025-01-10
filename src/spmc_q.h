@@ -9,6 +9,8 @@
 #include <cstdint>
 #include <functional>
 #include <atomic>
+#include <new>
+
 
 using BlockVersion = uint32_t;
 using MessageSize = uint32_t;

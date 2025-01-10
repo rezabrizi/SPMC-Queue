@@ -8,18 +8,20 @@
 
 #include <cstdint>
 #include <functional>
+#include <cstring>
 #include <atomic>
+#include <new>
 
 using BlockVersion = uint32_t;
 using MessageSize = uint32_t;
 using WriteCallback = std::function<void(uint8_t* data)>;
 
 struct Block{
-    std::atomic<BlockVersion> mVersion{0};
-    std::atomic<bool> unread{true};
-    std::atomic<MessageSize> mSize{0};
     // 512 Bytes per block
-    alignas(64) uint8_t data[64];
+    alignas(std::hardware_destructive_interference_size) uint8_t data[64];
+    std::atomic<BlockVersion> mVersion{0};
+    std::atomic<MessageSize> mSize{0};
+    std::atomic<bool> unread{false};
 };
 
 struct Header{
@@ -38,27 +40,35 @@ class SPSC_Q {
     void Write(MessageSize size, WriteCallback c){
         // This ensures that only one writer can write by having an atomic blockIndex and using fetch_add
         uint64_t blockIndex = mHeader.mBlockCounter.fetch_add(1, std::memory_order_acquire) % mSz;
+        // Get the current Block
         Block &currBlock = mBlocks[blockIndex];
 
-        BlockVersion expectedVersion = currBlock.mVersion.load(std::memory_order_acquire);
+        // We want to set `unread` to false
+        // If we succeed then we can write to the block safely
+        bool expectedUnread = true;
+        if (!currBlock.unread.compare_exchange_strong(expectedUnread, false, std::memory_order_acquire)){
+            // if we didn't succeed and `unread` was already false then the version should be even
+                // because either the version was just 0 meaning no writes or reads
+                // or a read happened and the version became even because the reader does odd_version + 1 = even_version
+            // in the case of the version being even after we didn't succeed we can still proceed with the writing
 
-        // if the version is odd make it even
-        if (expectedVersion % 2 == 1){
-            currBlock.mVersion.store(expectedVersion+1, std::memory_order_release);
+            // HOWEVER, if we failed to set unread to false because the reader thread set `unread` to false first
+            // AND the read is still happening then version is still odd so we CANNOT proceed with writing
+            BlockVersion expectedVersion = currBlock.mVersion.load(std::memory_order_acquire);
+            if (expectedVersion % 2 == 1){
+                return;
+            }
         }
 
+        // Copying the data and setting the size and marking the block as ready to read
         currBlock.mSize.store(size, std::memory_order_release);
-
         c(currBlock.data);
-        // set it to unread so that the reader can read it
         currBlock.unread.store(true, std::memory_order_release);
 
         // at this point the version will be even because we made sure in the if statement
-        expectedVersion = currBlock.mVersion.load(std::memory_order_acquire);
-        // make the version odd to indicate ready for a read
-        currBlock.mVersion.compare_exchange_strong(expectedVersion, expectedVersion + 1,
-                                                   std::memory_order_release);
+        currBlock.mVersion += 1;
     }
+
 
     bool read(int index, uint8_t* data, MessageSize& size){
         Block &block = mBlocks[index];
@@ -71,6 +81,7 @@ class SPSC_Q {
                 // ... do the copy now; FINALLY
                 size = block.mSize.load(std::memory_order_acquire);
                 std::memcpy(data, block.data, size);
+                block.mVersion.store(version+1, std::memory_order_release);
                 return true;
             }
         }

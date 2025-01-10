@@ -1,0 +1,34 @@
+/Applications/CLion.app/Contents/bin/cmake/mac/aarch64/bin/cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_C_COMPILER=/opt/homebrew/bin/gcc-14 -DCMAKE_CXX_COMPILER=/opt/homebrew/bin/g++-14 -DCMAKE_C_COMPILER=/opt/homebrew/bin/gcc-14 -DCMAKE_CXX_COMPILER=/opt/homebrew/bin/g++-14 -G "CodeBlocks - Unix Makefiles" -S /Users/rezatabrizi/dev/CLionProjects/SPMC-Queue -B /Users/rezatabrizi/dev/CLionProjects/SPMC-Queue/cmake-build-debug-gcc-14
+CMake Deprecation Warning:
+  Support for "Extra Generators" like
+
+    CodeBlocks
+
+  is deprecated and will be removed from a future version of CMake.  IDEs may
+  use the cmake-file-api(7) to view CMake-generated project build trees.
+
+
+-- The C compiler identification is GNU 14.2.0
+-- The CXX compiler identification is GNU 14.2.0
+-- Checking whether C compiler has -isysroot
+-- Checking whether C compiler has -isysroot - yes
+-- Checking whether C compiler supports OSX deployment target flag
+-- Checking whether C compiler supports OSX deployment target flag - yes
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /opt/homebrew/bin/gcc-14 - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Checking whether CXX compiler has -isysroot
+-- Checking whether CXX compiler has -isysroot - yes
+-- Checking whether CXX compiler supports OSX deployment target flag
+-- Checking whether CXX compiler supports OSX deployment target flag - yes
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /opt/homebrew/bin/g++-14 - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Found Boost: /opt/homebrew/opt/boost/lib/cmake/Boost-1.86.0/BoostConfig.cmake (found version "1.86.0")  
+-- Configuring done (1.4s)
+-- Generating done (0.0s)
+-- Build files have been written to: /Users/rezatabrizi/dev/CLionProjects/SPMC-Queue/cmake-build-debug-gcc-14

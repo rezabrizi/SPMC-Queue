@@ -1,0 +1,3 @@
+/Users/rezatabrizi/dev/CLionProjects/SPMC-Queue/cmake-build-debug-gcc-14/CMakeFiles/benchmark.dir
+/Users/rezatabrizi/dev/CLionProjects/SPMC-Queue/cmake-build-debug-gcc-14/CMakeFiles/edit_cache.dir
+/Users/rezatabrizi/dev/CLionProjects/SPMC-Queue/cmake-build-debug-gcc-14/CMakeFiles/rebuild_cache.dir

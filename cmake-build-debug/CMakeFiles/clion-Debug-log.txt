@@ -21,6 +21,6 @@ CMake Deprecation Warning:
 -- Detecting CXX compile features
 -- Detecting CXX compile features - done
 -- Found Boost: /opt/homebrew/opt/boost/lib/cmake/Boost-1.86.0/BoostConfig.cmake (found version "1.86.0")  
--- Configuring done (1.7s)
+-- Configuring done (0.9s)
 -- Generating done (0.0s)
 -- Build files have been written to: /Users/rezatabrizi/dev/CLionProjects/SPMC-Queue/cmake-build-debug

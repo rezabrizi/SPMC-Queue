@@ -90,6 +90,9 @@
 		<Unit filename="/Users/rezatabrizi/dev/CLionProjects/SPMC-Queue/src/spmc_q.h">
 			<Option target="benchmark"/>
 		</Unit>
+		<Unit filename="/Users/rezatabrizi/dev/CLionProjects/SPMC-Queue/src/spsc.h">
+			<Option target="benchmark"/>
+		</Unit>
 		<Unit filename="/Users/rezatabrizi/dev/CLionProjects/SPMC-Queue/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
 		</Unit>
