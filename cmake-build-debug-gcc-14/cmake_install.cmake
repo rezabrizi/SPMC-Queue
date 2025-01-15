@@ -1,4 +1,4 @@
-# Install script for directory: /Users/rezatabrizi/dev/CLionProjects/SPMC-Queue
+# Install script for directory: /Users/rezatabrizi/dev/CLionProjects/AtomicRing
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -45,5 +45,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/Users/rezatabrizi/dev/CLionProjects/SPMC-Queue/cmake-build-debug-gcc-14/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/Users/rezatabrizi/dev/CLionProjects/AtomicRing/cmake-build-debug-gcc-14/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

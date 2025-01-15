@@ -57,10 +57,10 @@ RM = /Applications/CLion.app/Contents/bin/cmake/mac/aarch64/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /Users/rezatabrizi/dev/CLionProjects/SPMC-Queue
+CMAKE_SOURCE_DIR = /Users/rezatabrizi/dev/CLionProjects/AtomicRing
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /Users/rezatabrizi/dev/CLionProjects/SPMC-Queue/cmake-build-debug-gcc-14
+CMAKE_BINARY_DIR = /Users/rezatabrizi/dev/CLionProjects/AtomicRing/cmake-build-debug-gcc-14
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -87,9 +87,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/rezatabrizi/dev/CLionProjects/SPMC-Queue/cmake-build-debug-gcc-14/CMakeFiles /Users/rezatabrizi/dev/CLionProjects/SPMC-Queue/cmake-build-debug-gcc-14//CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/rezatabrizi/dev/CLionProjects/AtomicRing/cmake-build-debug-gcc-14/CMakeFiles /Users/rezatabrizi/dev/CLionProjects/AtomicRing/cmake-build-debug-gcc-14//CMakeFiles/progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/rezatabrizi/dev/CLionProjects/SPMC-Queue/cmake-build-debug-gcc-14/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/rezatabrizi/dev/CLionProjects/AtomicRing/cmake-build-debug-gcc-14/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -117,65 +117,41 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named benchmark
+# Target rules for targets named AtomicRing
 
 # Build rule for target.
-benchmark: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 benchmark
-.PHONY : benchmark
+AtomicRing: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 AtomicRing
+.PHONY : AtomicRing
 
 # fast build rule for target.
-benchmark/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/benchmark.dir/build.make CMakeFiles/benchmark.dir/build
-.PHONY : benchmark/fast
+AtomicRing/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/AtomicRing.dir/build.make CMakeFiles/AtomicRing.dir/build
+.PHONY : AtomicRing/fast
 
-src/benchmark.o: src/benchmark.cpp.o
-.PHONY : src/benchmark.o
-
-# target to build an object file
-src/benchmark.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/benchmark.dir/build.make CMakeFiles/benchmark.dir/src/benchmark.cpp.o
-.PHONY : src/benchmark.cpp.o
-
-src/benchmark.i: src/benchmark.cpp.i
-.PHONY : src/benchmark.i
-
-# target to preprocess a source file
-src/benchmark.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/benchmark.dir/build.make CMakeFiles/benchmark.dir/src/benchmark.cpp.i
-.PHONY : src/benchmark.cpp.i
-
-src/benchmark.s: src/benchmark.cpp.s
-.PHONY : src/benchmark.s
-
-# target to generate assembly for a file
-src/benchmark.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/benchmark.dir/build.make CMakeFiles/benchmark.dir/src/benchmark.cpp.s
-.PHONY : src/benchmark.cpp.s
-
-src/main.o: src/main.cpp.o
-.PHONY : src/main.o
+src/t.o: src/t.cpp.o
+.PHONY : src/t.o
 
 # target to build an object file
-src/main.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/benchmark.dir/build.make CMakeFiles/benchmark.dir/src/main.cpp.o
-.PHONY : src/main.cpp.o
+src/t.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/AtomicRing.dir/build.make CMakeFiles/AtomicRing.dir/src/t.cpp.o
+.PHONY : src/t.cpp.o
 
-src/main.i: src/main.cpp.i
-.PHONY : src/main.i
+src/t.i: src/t.cpp.i
+.PHONY : src/t.i
 
 # target to preprocess a source file
-src/main.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/benchmark.dir/build.make CMakeFiles/benchmark.dir/src/main.cpp.i
-.PHONY : src/main.cpp.i
+src/t.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/AtomicRing.dir/build.make CMakeFiles/AtomicRing.dir/src/t.cpp.i
+.PHONY : src/t.cpp.i
 
-src/main.s: src/main.cpp.s
-.PHONY : src/main.s
+src/t.s: src/t.cpp.s
+.PHONY : src/t.s
 
 # target to generate assembly for a file
-src/main.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/benchmark.dir/build.make CMakeFiles/benchmark.dir/src/main.cpp.s
-.PHONY : src/main.cpp.s
+src/t.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/AtomicRing.dir/build.make CMakeFiles/AtomicRing.dir/src/t.cpp.s
+.PHONY : src/t.cpp.s
 
 # Help Target
 help:
@@ -185,13 +161,10 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
-	@echo "... benchmark"
-	@echo "... src/benchmark.o"
-	@echo "... src/benchmark.i"
-	@echo "... src/benchmark.s"
-	@echo "... src/main.o"
-	@echo "... src/main.i"
-	@echo "... src/main.s"
+	@echo "... AtomicRing"
+	@echo "... src/t.o"
+	@echo "... src/t.i"
+	@echo "... src/t.s"
 .PHONY : help
 
 

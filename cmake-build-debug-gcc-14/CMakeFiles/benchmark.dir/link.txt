@@ -1,1 +1,0 @@
-/opt/homebrew/bin/g++-14 -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk -mmacosx-version-min=15.1 -Wl,-search_paths_first -Wl,-headerpad_max_install_names CMakeFiles/benchmark.dir/src/main.cpp.o CMakeFiles/benchmark.dir/src/benchmark.cpp.o -o benchmark 

@@ -54,16 +54,16 @@ RM = /Applications/CLion.app/Contents/bin/cmake/mac/aarch64/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /Users/rezatabrizi/dev/CLionProjects/SPMC-Queue
+CMAKE_SOURCE_DIR = /Users/rezatabrizi/dev/CLionProjects/AtomicRing
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /Users/rezatabrizi/dev/CLionProjects/SPMC-Queue/cmake-build-debug-gcc-14
+CMAKE_BINARY_DIR = /Users/rezatabrizi/dev/CLionProjects/AtomicRing/cmake-build-debug-gcc-14
 
 #=============================================================================
 # Directory level rules for the build root directory
 
 # The main recursive "all" target.
-all: CMakeFiles/benchmark.dir/all
+all: CMakeFiles/AtomicRing.dir/all
 .PHONY : all
 
 # The main recursive "preinstall" target.
@@ -71,34 +71,34 @@ preinstall:
 .PHONY : preinstall
 
 # The main recursive "clean" target.
-clean: CMakeFiles/benchmark.dir/clean
+clean: CMakeFiles/AtomicRing.dir/clean
 .PHONY : clean
 
 #=============================================================================
-# Target rules for target CMakeFiles/benchmark.dir
+# Target rules for target CMakeFiles/AtomicRing.dir
 
 # All Build rule for target.
-CMakeFiles/benchmark.dir/all:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/benchmark.dir/build.make CMakeFiles/benchmark.dir/depend
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/benchmark.dir/build.make CMakeFiles/benchmark.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/rezatabrizi/dev/CLionProjects/SPMC-Queue/cmake-build-debug-gcc-14/CMakeFiles --progress-num=1,2,3 "Built target benchmark"
-.PHONY : CMakeFiles/benchmark.dir/all
+CMakeFiles/AtomicRing.dir/all:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/AtomicRing.dir/build.make CMakeFiles/AtomicRing.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/AtomicRing.dir/build.make CMakeFiles/AtomicRing.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/rezatabrizi/dev/CLionProjects/AtomicRing/cmake-build-debug-gcc-14/CMakeFiles --progress-num=1,2 "Built target AtomicRing"
+.PHONY : CMakeFiles/AtomicRing.dir/all
 
 # Build rule for subdir invocation for target.
-CMakeFiles/benchmark.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/rezatabrizi/dev/CLionProjects/SPMC-Queue/cmake-build-debug-gcc-14/CMakeFiles 3
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/benchmark.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/rezatabrizi/dev/CLionProjects/SPMC-Queue/cmake-build-debug-gcc-14/CMakeFiles 0
-.PHONY : CMakeFiles/benchmark.dir/rule
+CMakeFiles/AtomicRing.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/rezatabrizi/dev/CLionProjects/AtomicRing/cmake-build-debug-gcc-14/CMakeFiles 2
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/AtomicRing.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/rezatabrizi/dev/CLionProjects/AtomicRing/cmake-build-debug-gcc-14/CMakeFiles 0
+.PHONY : CMakeFiles/AtomicRing.dir/rule
 
 # Convenience name for target.
-benchmark: CMakeFiles/benchmark.dir/rule
-.PHONY : benchmark
+AtomicRing: CMakeFiles/AtomicRing.dir/rule
+.PHONY : AtomicRing
 
 # clean rule for target.
-CMakeFiles/benchmark.dir/clean:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/benchmark.dir/build.make CMakeFiles/benchmark.dir/clean
-.PHONY : CMakeFiles/benchmark.dir/clean
+CMakeFiles/AtomicRing.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/AtomicRing.dir/build.make CMakeFiles/AtomicRing.dir/clean
+.PHONY : CMakeFiles/AtomicRing.dir/clean
 
 #=============================================================================
 # Special targets to cleanup operation of make.

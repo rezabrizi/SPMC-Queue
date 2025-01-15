@@ -106,14 +106,14 @@ set(CMAKE_MAKEFILE_DEPENDS
   "/Applications/CLion.app/Contents/bin/cmake/mac/aarch64/share/cmake-3.27/Modules/Platform/Darwin.cmake"
   "/Applications/CLion.app/Contents/bin/cmake/mac/aarch64/share/cmake-3.27/Modules/Platform/UnixPaths.cmake"
   "/Applications/CLion.app/Contents/bin/cmake/mac/aarch64/share/cmake-3.27/Modules/ProcessorCount.cmake"
-  "/Users/rezatabrizi/dev/CLionProjects/SPMC-Queue/CMakeLists.txt"
+  "/Users/rezatabrizi/dev/CLionProjects/AtomicRing/CMakeLists.txt"
   "CMakeFiles/3.27.0/CMakeCCompiler.cmake"
   "CMakeFiles/3.27.0/CMakeCXXCompiler.cmake"
   "CMakeFiles/3.27.0/CMakeSystem.cmake"
-  "/opt/homebrew/opt/boost/lib/cmake/Boost-1.86.0/BoostConfig.cmake"
-  "/opt/homebrew/opt/boost/lib/cmake/Boost-1.86.0/BoostConfigVersion.cmake"
-  "/opt/homebrew/opt/boost/lib/cmake/boost_headers-1.86.0/boost_headers-config-version.cmake"
-  "/opt/homebrew/opt/boost/lib/cmake/boost_headers-1.86.0/boost_headers-config.cmake"
+  "/opt/homebrew/opt/boost/lib/cmake/Boost-1.87.0/BoostConfig.cmake"
+  "/opt/homebrew/opt/boost/lib/cmake/Boost-1.87.0/BoostConfigVersion.cmake"
+  "/opt/homebrew/opt/boost/lib/cmake/boost_headers-1.87.0/boost_headers-config-version.cmake"
+  "/opt/homebrew/opt/boost/lib/cmake/boost_headers-1.87.0/boost_headers-config.cmake"
   )
 
 # The corresponding makefile is:
@@ -134,5 +134,5 @@ set(CMAKE_MAKEFILE_PRODUCTS
 
 # Dependency information for all targets:
 set(CMAKE_DEPEND_INFO_FILES
-  "CMakeFiles/benchmark.dir/DependInfo.cmake"
+  "CMakeFiles/AtomicRing.dir/DependInfo.cmake"
   )
