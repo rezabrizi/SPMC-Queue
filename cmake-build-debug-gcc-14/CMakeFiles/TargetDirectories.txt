@@ -1,3 +1,0 @@
-/Users/rezatabrizi/dev/CLionProjects/AtomicRing/cmake-build-debug-gcc-14/CMakeFiles/AtomicRing.dir
-/Users/rezatabrizi/dev/CLionProjects/AtomicRing/cmake-build-debug-gcc-14/CMakeFiles/edit_cache.dir
-/Users/rezatabrizi/dev/CLionProjects/AtomicRing/cmake-build-debug-gcc-14/CMakeFiles/rebuild_cache.dir

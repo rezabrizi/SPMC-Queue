@@ -10,7 +10,7 @@
 #include "BlockingQueue.h"
 
 
-void smpcProducer(Q& queue, std::atomic<bool>& running) {
+void smpcProducer(SPMC_Q& queue, std::atomic<bool>& running) {
     int id = 0;
     while (running) {
         std::string message = "Message " + std::to_string(id);
@@ -24,7 +24,7 @@ void smpcProducer(Q& queue, std::atomic<bool>& running) {
     }
 }
 
-void smpcConsumer(Q& queue, std::atomic<bool>& running, std::atomic<int>& messageCount) {
+void smpcConsumer(SPMC_Q& queue, std::atomic<bool>& running, std::atomic<int>& messageCount) {
     uint64_t blockIndex = 0;
     while (running) {
         uint8_t data[64];
@@ -94,13 +94,13 @@ void startBenchmark(const std::string& queueName, QueueType& queue, ProducerFunc
 void test_spmc (){
     std::atomic<int> messageCount(0);
 
-    Q spmcQueue(1024);
+    SPMC_Q spmcQueue(1024);
     startBenchmark("SMPC Queue", spmcQueue, smpcProducer, smpcConsumer, 1, 1, 5, messageCount);
     messageCount = 0;
-    Q spmcQueue1(1024);
+    SPMC_Q spmcQueue1(1024);
     startBenchmark("SMPC Queue", spmcQueue1, smpcProducer, smpcConsumer, 1, 3, 5, messageCount);
     messageCount = 0;
-    Q spmcQueue2(1024);
+    SPMC_Q spmcQueue2(1024);
     startBenchmark("SMPC Queue", spmcQueue2, smpcProducer, smpcConsumer, 1, 10, 5, messageCount);
 }
 
@@ -130,6 +130,8 @@ void test_lock_free_boost(){
 }
 
 int main() {
+    test_spmc();
+    std::cout << "\n\n\n";
     test_lock_free_boost();
     return 0;
 }

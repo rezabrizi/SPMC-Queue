@@ -9,6 +9,7 @@
 #include <cstdint>
 #include <functional>
 #include <atomic>
+#include <memory>
 #include <new>
 
 
@@ -19,11 +20,11 @@ using WriteCallback = std::function<void(uint8_t* data)>;
 struct Block
 {
     // Local block versions reduce contention for the queue
-    std::atomic<BlockVersion> mVersion;
+    std::atomic<BlockVersion> mVersion{0};
     // Size of the data
-    std::atomic<MessageSize> mSize;
+    std::atomic<MessageSize> mSize{0};
     // 64 byte buffer
-    alignas(std::hardware_constructive_interference_size) uint8_t mData[64];
+    alignas(std::hardware_destructive_interference_size) uint8_t mData[64]{};
 };
 
 struct Header
@@ -33,22 +34,10 @@ struct Header
 };
 
 
-class Q {
+class SPMC_Q {
 public:
-    Q(size_t sz): mSz(sz)
-    {
-        // initialize the ring buffer
-        mBlocks = new Block[mSz];
-        for (size_t i = 0; i < mSz; i++)
-        {
-            mBlocks[i].mVersion.store(0, std::memory_order_relaxed);
-            mBlocks[i].mSize.store(0, std::memory_order_relaxed);
-        }
-    }
-    ~Q()
-    {
-        delete[] mBlocks;
-    }
+    SPMC_Q(size_t sz): mSz(sz), mBlocks( std::make_unique<Block[]>(sz)){}
+    ~SPMC_Q()=default;
 
     void Write(MessageSize size, WriteCallback c){
         // the next block index to write to
@@ -97,6 +86,6 @@ public:
 
 private:
     Header mHeader;
-    Block* mBlocks;
     size_t mSz;
+    std::unique_ptr<Block[]> mBlocks;
 };
