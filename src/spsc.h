@@ -12,7 +12,7 @@
 #include <atomic>
 #include <new>
 
-//
+
 using BlockVersion = uint32_t;
 using MessageSize = uint32_t;
 using WriteCallback = std::function<void(uint8_t* data)>;
